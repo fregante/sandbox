@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - uses: fregante/setup-git-token@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Save cash
+      run: |
+        echo 'lol' > history.csv
+        git add history.csv
+        DATE=$(date +%F)
+        git commit -m "Update $DATE"
+        git push origin HEAD:master
