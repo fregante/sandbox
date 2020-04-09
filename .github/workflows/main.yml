@@ -3,16 +3,17 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
+  create-version:
     runs-on: ubuntu-latest
-    
+    steps:
+    - run: echo lol
+    - run: exit
+    - run: echo 4
+  build:
+    runs-on: ubuntu-latest
+    needs: [create-version]
     steps:
     - uses: actions/checkout@v2
     - name: Save cash
       run: |
-        echo 'lol' > history.csv
-        git add history.csv
-        DATE=$(date +%F)
-        git commit -m "Update $DATE"
-        git push origin HEAD:master
+        echo 2
