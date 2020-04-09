@@ -8,6 +8,14 @@ on:
     - cron: '37 * * * *' # Every 4 days at 15:51 https://crontab.guru/#51_15_*/4_*_*
 
 jobs:
+  
+  yo:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo lol
+    - run: echo "${{ toJson(github) }}"
+    - run: echo "::set-output name=action_fruit::strawberry":
+     
   version:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
