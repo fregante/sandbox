@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo lol
-    - run: echo ${{ toJson(github) }}
+    - run: echo "${{ toJson(github) }}"
     - run: echo "::set-output name=action_fruit::strawberry"
   build:
     runs-on: ubuntu-latest
