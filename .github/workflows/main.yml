@@ -8,20 +8,7 @@ on:
     - cron: '* * * * *'
 
 jobs:
-  version_job:
-    name: Create version number
-    runs-on: ubuntu-latest
-    steps:
-    - id: version_step
-      run: echo "::set-output name=version_number::1.2.3"
-    
-  output:
-    name: Output
-    runs-on: ubuntu-latest
-    needs: version_job
-    steps:
-    - run: echo "${{ jobs.version_job.steps.version_step.outputs.version_number }}"
-  
+
   yo:
     runs-on: ubuntu-latest
     steps:
