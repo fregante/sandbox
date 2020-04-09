@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo lol
-    - run: exit
+    - run: exit -1
     - run: echo 4
   build:
     runs-on: ubuntu-latest
