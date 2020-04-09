@@ -14,7 +14,6 @@ jobs:
     steps:
     - run: echo lol
     - run: echo "${{ toJson(github) }}"
-    - run: echo "::set-output name=action_fruit::strawberry":
      
   version:
     if: github.event_name == 'push'
