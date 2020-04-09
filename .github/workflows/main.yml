@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   create-version:
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
     - run: echo lol
