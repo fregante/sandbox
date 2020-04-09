@@ -1,9 +1,14 @@
 name: CI
 
-on: [push]
+on: 
+  push:
+    tags:
+      - '20.*'
+  schedule:
+    - cron: '37 * * * *' # Every 4 days at 15:51 https://crontab.guru/#51_15_*/4_*_*
 
 jobs:
-  create-version:
+  version:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -12,8 +17,8 @@ jobs:
     - run: echo "::set-output name=action_fruit::strawberry"
   build:
     runs-on: ubuntu-latest
-    needs: [create-version]
-    if: 'true'
+    needs: version
+    if: jobs.version.output.version
     steps:
     - uses: actions/checkout@v2
     - name: Save cash
