@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   create-version:
-    if: github.event_name === 'schedule'
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
     - run: echo lol
@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: [create-version]
-    if: job.create-version.output.action_fruit === 'strawberry'
+    if: job.create-version.output.action_fruit == 'strawberry'
     steps:
     - uses: actions/checkout@v2
     - name: Save cash
