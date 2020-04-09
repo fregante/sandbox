@@ -14,9 +14,10 @@ jobs:
     steps:
     - run: echo lol
     - run: echo "${{ toJson(github) }}"
+    - name: cancelling
+      uses: andymckay/cancel-action@0.2
      
   version:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
     - run: echo lol
