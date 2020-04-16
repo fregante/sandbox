@@ -8,21 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: latest-tag
-        run: echo "::set-output name=name::"$(git tag)
-      - run: echo ${{ steps.latest-tag.outputs.name }}
-      - run: echo 'got it!'
-        if: steps.latest-tag.outputs.name
+      - id: head
+        run: echo "::set-output name=was-tagged::"$(git tag)
+      - run: echo ${{ steps.head.outputs.was-tagged }}
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          if [[ false ]]; then
-            export VER=$(npx daily-version)
-            git tag $VER -m $VER
-            git push origin $VER
-            echo "::set-output name=created::true"
-          fi
+      - if: ! steps.head.outputs.was-tagged
+        run: |
+          export VER=$(npx daily-version)
+          git tag $VER -m $VER
+          git push origin $VER
 
   build:
     needs: create-version
