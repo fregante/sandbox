@@ -21,7 +21,7 @@ jobs:
 
   build:
     needs: create-version
-    if: github.event_name == 'push' || needs.create-version.outputs.created
+    if: github.event_name == 'pushNO' || needs.create-version.outputs.created
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
