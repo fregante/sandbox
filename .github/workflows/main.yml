@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch --tags
+      - run: git tag -l --points-at HEAD
       - id: head
-        run: echo "::set-output name=was-tagged::"$(git tag)
-      - run: echo ${{ steps.head.outputs.was-tagged }}
+        run: '[[ $(git tag -l --points-at HEAD) = "" ]] && echo "::set-output name=tag::now"'
+      - run: echo ${{ steps.head.outputs.tag }}
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
