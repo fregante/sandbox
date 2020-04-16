@@ -8,19 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git tag
-      - run: git tag -l --points-at HEAD
-      - run: git fetch --tags
-      - run: git tag -l --points-at HEAD
-      - run: git tag
+      - id: latest-tag
+        run: echo "::set-output name=name::"$(git tag)
+      - run: echo ${{ steps.latest-tag.outputs.name }}
+      - run: echo 'got it!'
+        if: steps.latest-tag.outputs.name
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: git tag -l --points-at HEAD
-      - run: git tag -l
-      - run: git tag
       - run: |
-          if [[ $(git tag -l --points-at HEAD) = "" ]]; then
+          if [[ false ]]; then
             export VER=$(npx daily-version)
             git tag $VER -m $VER
             git push origin $VER
