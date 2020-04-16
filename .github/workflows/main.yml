@@ -1,29 +1,66 @@
-name: CI
+name: Deployment
 
 on: [push]
 
 jobs:
 
-  yo:
+  create-version:
     runs-on: ubuntu-latest
     steps:
-    - run: echo lol
-    - run: echo "${{ toJson(github) }}"
-    - name: cancelling
-      uses: andymckay/cancel-action@0.2
-    - run: sleep 100
-     
-  version:
-    runs-on: ubuntu-latest
-    needs: yo
-    steps:
-    - run: echo lol
-    - run: echo "${{ toJson(github) }}"
+      - uses: actions/checkout@v2
+      - uses: fregante/setup-git-token@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          if [[ $(git tag -l --points-at HEAD) = "" ]]; then
+            export VER=$(npx daily-version)
+            git tag $VER -m $VER
+            git push origin $VER
+            echo "::set-output name=created::true"
+          fi
+
   build:
+    needs: create-version
+    if: github.event_name == 'push' || needs.create-version.outputs.created
     runs-on: ubuntu-latest
-    needs: version
     steps:
     - uses: actions/checkout@v2
-    - name: Save cash
+    - run: npm install
+    - run: npm test
+    - name: Update extension’s meta
       run: |
-        echo 2
+        export VER=$(echo "$GITHUB_REF" | sed -e 's/refs\/tags\///')
+        echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL
+        npm run version
+    - uses: actions/upload-artifact@v1
+      with:
+        name: built-extension
+        path: distribution
+
+  deploy-to-chrome:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: built-extension
+        path: distribution
+    - run: cd distribution && npx chrome-webstore-upload-cli upload --auto-publish
+      env:
+        EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+
+  deploy-to-firefox:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: built-extension
+        path: distribution
+    - run: cd distribution && npx web-ext-submit
+      env:
+        WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+        WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
