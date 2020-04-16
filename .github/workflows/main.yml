@@ -8,7 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git fetch HEAD --follow-tags
+      - run: git tag
+      - run: git tag -l --points-at HEAD
+      - run: git fetch --tags
+      - run: git tag -l --points-at HEAD
+      - run: git tag
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
