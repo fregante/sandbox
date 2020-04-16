@@ -8,23 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git fetch --tags
-      - run: git tag -l --points-at HEAD
-      - id: head
-        run: if [[ $(git tag -l --points-at HEAD) = "" ]]; then echo "::set-output name=tag::now"; fi
-      - run: echo ${{ steps.head.outputs.tag }}
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - if: contains(steps.head.outputs.was-tagged, '.') != true
+      - name: Create tag if necessary
+        if: github.event_name == 'schedule'
+        id: tag
         run: |
-          export VER=$(npx daily-version)
-          git tag $VER -m $VER
-          git push origin $VER
+          git fetch --tags
+          if [[ $(git tag -l --points-at HEAD) = '' ]]; then
+            echo '::set-output name=new::true'
+            export VER=$(npx daily-version)
+            git tag $VER -m $VER
+            git push origin $VER
+          fi
 
   build:
     needs: create-version
-    if: github.event_name == 'pushNO' || needs.create-version.outputs.created
+    if: github.event_name == 'pushNO' || needs.create-version.outputs.tag
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
