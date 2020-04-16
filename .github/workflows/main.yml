@@ -11,6 +11,8 @@ jobs:
       - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - run: git tag -l --points-at HEAD
+      - run: git tag -l
       - run: |
           if [[ $(git tag -l --points-at HEAD) = "" ]]; then
             export VER=$(npx daily-version)
