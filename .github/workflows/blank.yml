@@ -6,7 +6,7 @@ on:
     tags:
       - '*'
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/5 * 1 1 1'
 
 jobs:
 
