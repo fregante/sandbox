@@ -14,6 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: git tag -l --points-at HEAD
-    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-    - run: node -e "const util = require('util'); util.promisify(require('child_process').execFile)('git', ['tag', '-l', '--points-at', 'HEAD']).then(function (a) {console.log(typeof a, Boolean(a.stdout),  Boolean(a.stdout.trim()),a.stdout.split('\n')[0], 'lol')}).catch(console.error)"
+    - run: mkdir distribution && echo test > distribution/yoooooo.txt
+    - uses: actions/upload-artifact@v2
+      with:
+        path: distribution
+        
+  deploy-to-chrome:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+    - run: ls -a
+    - run: cat artifact/yoooooo.txt
