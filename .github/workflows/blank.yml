@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: git tag -l --points-at HEAD
-    - run: git fetch --tags
+    - run: git fetch --depth=1 --tags
     - run: git tag -l --points-at HEAD
