@@ -16,4 +16,4 @@ jobs:
     - uses: actions/checkout@v2
     - run: git tag -l --points-at HEAD
     - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-    - run: node -e "const util = require('util'); util.promisify(require('child_process').execFile)('git', ['tag', '-l', '--points-at', 'HEAD']).then(function (a) {console.log(typeof a, a.stdout.split('\n')[0], 'lol')}).catch(console.error)"
+    - run: node -e "console.log(process.env.GITHUB_REF);console.log(process.env.GITHUB_REF.replace('/refs/tags/', ''))"
