@@ -25,6 +25,8 @@ jobs:
     if: github.event_name == 'push' || needs.Version.outputs.created
     runs-on: ubuntu-latest
     steps:
+    - run: echo 'created' ${{ needs.Version.outputs.created }}
+    - run: echo "version" ${{ needs.Version.outputs.version }}
     - uses: actions/checkout@v2
     - run: echo npm install
     - run: echo npm test
