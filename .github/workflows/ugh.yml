@@ -1,9 +1,9 @@
 name: Yo
 
 on:
-  schedule:
-    - cron: '*/6 * * * *'
   push:
+    branches: 
+      - master
     tags:
       - "20.*"
       - "21.*"
