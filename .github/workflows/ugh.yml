@@ -8,16 +8,12 @@ on:
 jobs:
 
   Publish:
-    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
-        include:
-          - name: Chrome
-            command: cd artifact && npx chrome-webstore-upload-cli@1 upload --auto-publish
-          - name: Firefox
-            command: cd artifact && npx web-ext-submit@4
+        command:
+          - cd artifact && npx chrome-webstore-upload-cli@1 upload --auto-publish
+          - cd artifact && npx web-ext-submit@4
     steps:
     - uses: actions/download-artifact@v2
     - run: ${{ matrix.command }}
