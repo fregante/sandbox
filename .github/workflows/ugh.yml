@@ -32,8 +32,8 @@ jobs:
       env:
         VER: ${{ needs.Version.outputs.version }}
       run: |
-        echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL
-        cat distribution/SOURCE_URL
+        echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > SOURCE_URL
+        cat SOURCE_URL
     - uses: actions/upload-artifact@v1
       with:
         name: built-extension
