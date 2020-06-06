@@ -18,12 +18,12 @@ jobs:
   Version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
-      created: ${{ steps.version.outputs.created }}
+      version: ${{ steps.daily-version.outputs.version }}
+      created: ${{ steps.daily-version.outputs.created }}
     steps:
       - uses: actions/checkout@v2
       - name: Create tag if necessary
-        id: version
+        id: daily-version
         uses: fregante/daily-version-action@v1
 
   Build:
