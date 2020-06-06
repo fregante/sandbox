@@ -4,8 +4,6 @@ on:
   issue_comment: 
     types: [created, deleted]
   push:
-    branches: 
-      - master
     tags:
       - "20.*"
       - "21.*"
@@ -33,7 +31,6 @@ jobs:
     steps:
     - run: echo 'created' ${{ needs.Version.outputs.created }}
     - run: echo "version" ${{ needs.Version.outputs.version }}
-    - run: echo "json" ${{ toJSON(needs.Version) }}
     - uses: actions/checkout@v2
     - run: echo npm install
     - run: echo npm test
