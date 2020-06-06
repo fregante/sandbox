@@ -15,9 +15,13 @@ jobs:
 
   Version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      created: ${{ steps.version.outputs.created }}
     steps:
       - uses: actions/checkout@v2
       - name: Create tag if necessary
+        id: version
         uses: fregante/daily-version-action@v1
 
   Build:
@@ -27,6 +31,7 @@ jobs:
     steps:
     - run: echo 'created' ${{ needs.Version.outputs.created }}
     - run: echo "version" ${{ needs.Version.outputs.version }}
+    - run: echo "json" ${{ toJSON(needs.Version) }}
     - uses: actions/checkout@v2
     - run: echo npm install
     - run: echo npm test
