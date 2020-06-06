@@ -1,6 +1,8 @@
 name: Yo
 
 on:
+  issue_comment: 
+    types: [created, deleted]
   push:
     branches: 
       - master
