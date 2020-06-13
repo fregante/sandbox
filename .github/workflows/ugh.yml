@@ -1,4 +1,4 @@
-name: Yo
+name: Publish
 
 on:
   pull_request_review:
@@ -7,29 +7,16 @@ on:
 
 jobs:
 
-  Publish:
+  npm:
     runs-on: ubuntu-latest
-    if: github.event.review.author_association == 'OWNER'
+    if: contains('OWNER,COLLABORATOR', github.event.review.author_association) && startsWith(github.event.review.body, '🚀')
     steps:
-      - name: is owner
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - run: npm install
+      - run: |
+          WORDS=($COMMENT)
+          echo npm version ${WORDS[1]}
         env:
-          GITHUB_CONTEXT: ${{ toJson(github.event.review) }}
-        run: echo "$GITHUB_CONTEXT"
-
-  arraycontainscollab:
-    runs-on: ubuntu-latest
-    if: contains('OWNER,COLLABORATOR', github.event.review.author_association)
-    steps:
-      - name: is owner
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github.event.review) }}
-        run: echo "$GITHUB_CONTEXT"
-
-  B:
-    runs-on: ubuntu-latest
-    if: startsWith(github.event.review.body, '🚀')
-    steps:
-      - name: deploy review
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github.event.review) }}
-        run: echo "$GITHUB_CONTEXT"
+          COMMENT: ${{ toJson(github.event.review.body) }}
