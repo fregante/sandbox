@@ -16,9 +16,9 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github.event.review) }}
         run: echo "$GITHUB_CONTEXT"
 
-  c:
+  arraycontainscollab:
     runs-on: ubuntu-latest
-    if: contains(github.event.review.author_association, 'OWNER,COLLABORATOR')
+    if: contains(['OWNER', 'COLLABORATOR'], github.event.review.author_association)
     steps:
       - name: is owner
         env:
