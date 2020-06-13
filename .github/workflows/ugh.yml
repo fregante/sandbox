@@ -12,7 +12,15 @@ jobs:
     steps:
       - name: LIVE! Dump GitHub context
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: LIVE! Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event.review) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: LIVE! Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event.review.body) }}
         run: echo "$GITHUB_CONTEXT"
       - name: Dump job context
         env:
