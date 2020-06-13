@@ -1,16 +1,16 @@
 name: Yo
 
 on:
-  pull_request_review_comment:
+  pull_request_review:
     types:
-      - created
+      - submitted
 
 jobs:
 
   Publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
+      - name: LIVE! Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
