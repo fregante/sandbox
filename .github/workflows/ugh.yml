@@ -18,7 +18,7 @@ jobs:
 
   arraycontainscollab:
     runs-on: ubuntu-latest
-    if: contains(['OWNER', 'COLLABORATOR'], github.event.review.author_association)
+    if: contains('OWNER,COLLABORATOR', github.event.review.author_association)
     steps:
       - name: is owner
         env:
