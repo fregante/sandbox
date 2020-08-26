@@ -1,7 +1,7 @@
 <!-- Please follow the template -->
 Thanks for contributing! 🍄
 
-**LINKED ISSUES:** <!-- Does this PR close/fix an existing issue? Write something like `Closes #10` -->
+**LINKED ISSUES:** <!-- Does this PR fix an existing issue? Write something like `Closes #10` -->
 
 **TEST URLS:** <!-- Add some test URLs -->
 
