@@ -1,5 +1,5 @@
 <!-- Please follow the template -->
-Thanks for contributing! 🍄
+<!-- Thanks for contributing! 🍄 -->
 
 **LINKED ISSUES:**
 <!-- Does this PR fix an existing issue? Write something like `Closes #10` -->
