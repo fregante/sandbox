@@ -18,3 +18,4 @@ jobs:
         include-hash: true
         include-range: true
         token: ${{ secrets.GITHUB_TOKEN }}
+        exclude: '^Meta'
