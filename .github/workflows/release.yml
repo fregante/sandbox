@@ -1,7 +1,9 @@
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+    inputs:
+      Version:
+        description: "Example: v1.2.3"
+        required: true
 
 jobs:
   Release:
@@ -10,13 +12,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 100
+    - run: git tag ${{ github.event.inputs.Version }}
     - uses: notlmn/release-with-changelog@v2
       with:
-        header: '### Changelog'
-        footer: 'Custom footer'
         include-hash: true
         include-range: true
         token: ${{ secrets.GITHUB_TOKEN }}
         exclude: '^Meta'
     - name: Update major tag
-      run: git push origin HEAD:$(echo $GITHUB_REF | sed 's/\..*//') -f
+      run: |
+        MAJOR=$(echo ${{ github.event.inputs.Version }}  | sed 's/\..*//')
+        git push origin HEAD:refs/tags/$MAJOR -f
