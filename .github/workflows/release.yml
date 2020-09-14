@@ -18,3 +18,5 @@ jobs:
         include-range: true
         token: ${{ secrets.GITHUB_TOKEN }}
         exclude: '^Meta'
+    - name: Update major tag
+      run: git push origin HEAD:$(echo $GITHUB_REF | sed 's/\..*//') -f
