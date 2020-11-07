@@ -1,3 +1,5 @@
+ghat:
+  name: lol
 on:
   - push
 
