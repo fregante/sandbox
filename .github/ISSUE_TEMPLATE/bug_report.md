@@ -6,6 +6,7 @@ labels: ''
 assignees: ''
 
 ---
+<!-- Please follow the template -->
 
 **Describe the bug**
 A clear and concise description of what the bug is.
