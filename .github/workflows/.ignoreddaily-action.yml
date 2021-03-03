@@ -5,6 +5,9 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
+  workflow_dispatch: null
+  schedule:
+    - cron: 42 17 1 * 1
 
 jobs:
   build:
