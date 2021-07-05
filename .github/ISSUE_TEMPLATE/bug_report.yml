@@ -1,0 +1,46 @@
+name: 🐛 Report a bug
+description: '___'
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a bug! ⛰
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Please confirm the following:"
+      options:
+        - label: I am sure the bug is caused by Refined GitHub, I already tried disabling the extension first. (optionally, I also disabled any related userscripts/userstyles and/or in a fresh browser profile if needed).
+          required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the problem and how to replicate it
+      value:
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots/video/gif showing the issue, if it’s a visual
+      description: Files can be dropped in this field
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console output
+      description: Please copy and paste any relevant console log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: input
+    id: example-url
+    attributes:
+      label: Example URL
+      description: A REAL URL where the bug appears. If it happens on a private repo, find an equivalent public URL.
+      placeholder: https://github.com/example.htm
+    validations:
+      required: true
+  - type: input
+    id: browsers
+    attributes:
+      label: Browser used
+    validations:
+      required: true
