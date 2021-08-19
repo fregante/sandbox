@@ -5,8 +5,8 @@ jobs:
   Release:
     runs-on: ubuntu-latest
     env:
-      a: 'true'
-      b: ${{ github.ref == 'refs/heads/master' }}
+      a: true
+      b: false
       c: ${{ github.ref == 'refs/heads/c' }}
     steps:
     - run: echo $a
