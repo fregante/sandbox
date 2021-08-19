@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
-      PUBLIC_RELEASE: ${{ github.ref == 'refs/heads/master' || 'true' }}
+      PUBLIC_RELEASE: true
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
       PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/sdas' }}
     steps:
