@@ -8,7 +8,7 @@ jobs:
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
       PUBLIC_RELEASE: 'true'
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
-      PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/sdas' }}
+      PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/main' }}
     steps:
     - run: echo $PUBLIC_RELEASE
       if: ${{ env.PUBLIC_RELEASE == 'true' }} # boolean comparison required
