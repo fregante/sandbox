@@ -1,4 +1,4 @@
-on: [push]
+on: push
 
 env:
   PUBLIC_RELEASE: ${{ github.ref == 'refs/heads/main' || contains(github.ref, 'release/') }}
