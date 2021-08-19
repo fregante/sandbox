@@ -9,12 +9,14 @@ jobs:
       PUBLIC_RELEASE: 'true'
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
       PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/master' }}
-      Z: ${{ toJSON(env.PUBLIC_RELEASE) }}
-      A: ${{ toJSON(env.PUBLIC_RELEASEA) }}
     steps:
     - run: echo $PUBLIC_RELEASE
       if: ${{ env.PUBLIC_RELEASE == 'true' }} # boolean comparison required
     - run: echo $PUBLIC_RELEASEA
       if: ${{env.PUBLIC_RELEASEA == 'true' }} # boolean comparison required
     - run: echo $Z
+      env:
+        Z: ${{ toJSON(env.PUBLIC_RELEASE) }}
     - run: echo $A
+      env:
+        A: ${{ toJSON(env.PUBLIC_RELEASEA) }}
