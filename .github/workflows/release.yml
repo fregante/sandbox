@@ -10,8 +10,8 @@ jobs:
       c: ${{ github.ref == 'refs/heads/c' }}
     steps:
     - run: echo $a
-      if: ${{ toJSON(env.a) }}
+      if: ${{ fromJSON(env.a) }}
     - run: echo $b
-      if: ${{ toJSON(env.b) }}
+      if: ${{ fromJSON(env.b) }}
     - run: echo $c
-      if: ${{ toJSON(env.c) }}
+      if: ${{ fromJSON(env.c) }}
