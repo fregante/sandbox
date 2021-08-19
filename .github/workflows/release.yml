@@ -5,18 +5,13 @@ jobs:
   Release:
     runs-on: ubuntu-latest
     env:
-      # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
-      PUBLIC_RELEASE: 'true'
-      # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
-      PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/master' }}
+      a: 'true'
+      b: ${{ github.ref == 'refs/heads/master' }}
+      c: ${{ github.ref == 'refs/heads/c' }}
     steps:
-    - run: echo $PUBLIC_RELEASE
-      if: ${{ env.PUBLIC_RELEASE == 'true' }} # boolean comparison required
-    - run: echo $PUBLIC_RELEASEA
-      if: ${{env.PUBLIC_RELEASEA == 'true' }} # boolean comparison required
-    - run: echo $Z
-      env:
-        Z: ${{ toJSON(env.PUBLIC_RELEASE) }}
-    - run: echo $A
-      env:
-        A: ${{ toJSON(env.PUBLIC_RELEASEA) }}
+    - run: echo $a
+      if: ${{ toJSON(env.a) }}
+    - run: echo $b
+      if: ${{ toJSON(env.b) }}
+    - run: echo $c
+      if: ${{ toJSON(env.c) }}
