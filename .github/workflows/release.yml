@@ -4,5 +4,7 @@ jobs:
   Release:
     runs-on: ubuntu-latest
     steps:
-    - run:  echo "action_state=yellow" >> $GITHUB_ENV
-    - run:  echo my name is $action_state
+    - run:  echo "PUBLIC_RELEASE=" >> $GITHUB_ENV
+    - run:  echo my name is $ac
+      env:
+        ac: ${{ env.DAY_OF_WEEK == 'Mon' }}
