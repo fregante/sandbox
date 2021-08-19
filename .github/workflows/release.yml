@@ -10,7 +10,11 @@ jobs:
       # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
       PUBLIC_RELEASEA: ${{ github.ref == 'refs/heads/master' }}
     steps:
-    - run: echo $SOURCE_MAP_PATH - $PUBLIC_RELEASE - $PUBLIC_RELEASEA
-      env:
-        # Uploads sourcemaps to S3, if it's a public release
-        SOURCE_MAP_PATH: sourcemaps/${{ env.PUBLIC_RELEASE }}
+    - run: echo $PUBLIC_RELEASE
+      if: env.PUBLIC_RELEASE == true # boolean comparison required
+    - run: echo $PUBLIC_RELEASEA
+      if: env.PUBLIC_RELEASEA == true # boolean comparison required
+    - run: echo $PUBLIC_RELEASE
+      if: env.PUBLIC_RELEASE 
+    - run: echo $PUBLIC_RELEASEA
+      if: env.PUBLIC_RELEASEA 
