@@ -1,11 +1,17 @@
 on: push
 
 env:
-  PUBLIC_RELEASE: ${{ github.ref == 'refs/heads/main' || contains(github.ref, 'release/') }}
+  abc: ABC
+  cde: CDE
+  fgh: FGH
 jobs:
   Release:
     runs-on: ubuntu-latest
     steps:
-    - run: echo $PUBLIC_RELEASE
+    - run: echo $a - $b - $c
+      env: 
+        a: $abc
+        b: ${{ env.cde }}
+        c: env.fgh
     - run: echo releasing
       if: env.PUBLIC_RELEASE == true
