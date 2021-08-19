@@ -1,10 +1,10 @@
 on: [push]
 
+env:
+  PUBLIC_RELEASE: ${{ github.ref == 'refs/heads/main' || contains(github.ref, 'release/') }}
 jobs:
   Release:
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_RELEASE: ${{ github.ref == 'refs/heads/main' || contains(github.ref, 'release/') }}
     steps:
     - run: echo $PUBLIC_RELEASE
     - run: echo releasing
