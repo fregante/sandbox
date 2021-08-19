@@ -8,4 +8,4 @@ jobs:
     steps:
     - run: echo $PUBLIC_RELEASE
     - run: echo releasing
-      if: env.PUBLIC_RELEASE
+      if: env.PUBLIC_RELEASE == true
