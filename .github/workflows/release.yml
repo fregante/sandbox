@@ -1,0 +1,17 @@
+on: push
+
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    env:
+      a: true
+      b: false
+      c: ${{ github.ref == 'refs/heads/c' }}
+    steps:
+    - run: echo $a
+      if: ${{ fromJSON(env.a) }}
+    - run: echo $b
+      if: ${{ fromJSON(env.b) }}
+    - run: echo $c
+      if: ${{ fromJSON(env.c) }}
