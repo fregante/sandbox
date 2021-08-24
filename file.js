@@ -1,12 +1,10 @@
 Title
 ====================
 
-Title my Edit
+New Title 
 ====================
 
-  Subtitle
-
-Title
+Titles
 ====================
 
 Title
