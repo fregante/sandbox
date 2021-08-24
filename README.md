@@ -8,7 +8,6 @@ paragraph [REMOVED]
 # level 1 heading
 # level 1 heading [REMOVED]
 
-
 ## level 2 heading
 ## level 2 heading
 ## level 2 heading [REMOVED]
