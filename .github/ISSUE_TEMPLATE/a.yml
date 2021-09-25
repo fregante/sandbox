@@ -1,8 +1,9 @@
 name: Rule proposal
 description: "Propose a new rule for the '@typescript-eslint/eslint-plugin' package"
+title: "Rule proposal: "
 labels:
-  - 'enhancement: new base rule extension'
-  - 'package: eslint-plugin'
+  - "enhancement: new base rule extension"
+  - "package: eslint-plugin"
   - triage
 body:
   - type: markdown
