@@ -1,26 +1,38 @@
-name: 🆕 Suggest an improvement or new feature
-description: ———
-labels: enhancement, under discussion
+name: Rule proposal
+description: Propose a new rule for the '@typescript-eslint/eslint-plugin' package
+labels:
+  - 'enhancement: new base rule extension'
+  - 'package: eslint-plugin'
+  - triage
 body:
   - type: markdown
     attributes:
       value: |
-        ⚠️ To focus on bugfixes, Refined GitHub won't be adding new features while the [feature freeze](https://github.com/sindresorhus/refined-github/issues/4596) is active.
-        👋 There might be some [easy bugs](https://github.com/sindresorhus/refined-github/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22+label%3Abug) to tackle for new contributors.
-  - type: textarea
+        Before opening a new issue:
+        - Look for existing [open or closed rule proposals](https://github.com/typescript-eslint/typescript-eslint/issues?q=label%3A%22enhancement%3A+new+base+rule+extension%22)
+        - Look for [existing rules](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
+        - Ensure that the rule you want to propose is related to types. If not, consider looking into [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
+- type: textarea
     attributes:
       label: Description
-      description: 'Please ensure your requested feature makes sense for Refined GitHub: https://github.com/sindresorhus/refined-github/issues/2960'
+      description: Explain here why this rule would be beneficial
     validations:
       required: true
   - type: textarea
     attributes:
-      label: Screenshot
-      description: You can provide screenshots/mockups to better visualize your idea. Files can be dropped in this field
+      label: Fail
+      description: Specify an example of code that should be detected
+      value: |
+        ```ts
+        var replace = 'me';
+        ```
   - type: input
     attributes:
-      label: Example URL
-      description: Include a REAL URL where the feature should appear. e.g. Do you want a feature to appear on the main page of a repo? Paste a link to a repo
-      placeholder: https://github.com/sindresorhus/refined-github
+      label: Pass
+      description: Specify an example of code that would be accepted in its place
+      value: |
+        ```ts
+        const replace = 'me';
+        ```
     validations:
       required: true
