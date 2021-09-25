@@ -13,12 +13,14 @@ body:
         - Look for [existing rules](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
         - Ensure that the rule you want to propose is related to types. If not, consider looking into [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
   - type: textarea
+    validations:
+      required: true
     attributes:
       label: Description
       description: Explain here why this rule would be beneficial
+  - type: textarea
     validations:
       required: true
-  - type: textarea
     attributes:
       label: Fail
       description: Specify an example of code that should be detected
@@ -26,7 +28,9 @@ body:
         ```ts
         var replace = 'me';
         ```
-  - type: input
+  - type: textarea
+    validations:
+      required: true
     attributes:
       label: Pass
       description: Specify an example of code that would be accepted in its place
@@ -34,5 +38,3 @@ body:
         ```ts
         const replace = 'me';
         ```
-    validations:
-      required: true
