@@ -16,7 +16,7 @@ body:
           required: true
   - type: checkboxes
     attributes:
-      label: Include in this issue:
+      label: 'Include in this issue:'
       options:
         - label: Screenshots/video/gif demonstrating the bug, if it’s visual
         - label: Console errors, if any
