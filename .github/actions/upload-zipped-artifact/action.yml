@@ -9,6 +9,12 @@ inputs:
   path:
     description: A file, directory or wildcard pattern that describes what to upload.
     required: true
+    default: '.'
+  directory:
+    description: |
+      Working directory before zipping, refer to `thedoctor0/zip-release` for usage
+      https://github.com/TheDoctor0/zip-release
+    default: '.'
   exclusions:
     description: |
       Globs to exclude, refer to `thedoctor0/zip-release` for usage
@@ -27,6 +33,7 @@ runs:
       with:
         filename: artifact.zip
         path: ${{ inputs.path }}
+        directory: ${{ inputs.directory }}
         exclusions: ${{ inputs.exclusions }}
 
     - uses: actions/upload-artifact@v2
