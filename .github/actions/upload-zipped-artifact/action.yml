@@ -29,7 +29,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: zip -r x.x node_modules/is-relative/ -x ${{ inputs.exclusions }}
+    - uses: thedoctor0/zip-release@4fb9e4ff72847dd3d1c111cf63834e353ed7cb3d # Review updates manually
       with:
         filename: artifact.zip
         path: ${{ inputs.path }}
