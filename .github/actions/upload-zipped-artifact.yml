@@ -24,7 +24,7 @@ runs:
     - uses: thedoctor0/zip-release@4fb9e4f # Review updates manually
       with:
         filename: artifact.zip
-        path: dist
+        path: ${{ inputs.path }}
         exclusions: ${{ inputs.exclusions }}
 
     - uses: actions/upload-artifact@v2
