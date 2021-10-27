@@ -32,4 +32,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - uses: ./.github/actions/upload-zipped-artifact
         with:
-          path: .github
+          path: .github/ISSUE_TEMPLATE
+          name: lol
+          exclusions: '*.md'
