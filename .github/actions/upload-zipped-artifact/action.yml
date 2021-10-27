@@ -4,6 +4,7 @@ description: Matches actions/upload-artifact, except it compress files with zip 
 inputs:
   name:
     description: Name of the artifact file
+    default: artifact
     required: false
   path:
     description: A file, directory or wildcard pattern that describes what to upload.
@@ -14,6 +15,7 @@ inputs:
       https://github.com/TheDoctor0/zip-release
     required: true
   if-no-files-found:
+    default: warn
     required: false
   retention-days:
     required: false
