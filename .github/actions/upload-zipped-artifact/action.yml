@@ -39,9 +39,9 @@ runs:
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ inputs.name }}
-        path: artifact.zip
+        path: ${{ inputs.directory }}/artifact.zip
         if-no-files-found: ${{ inputs.if-no-files-found }}
         retention-days: ${{ inputs.retention-days }}
 
-    - run: rm artifact.zip
+    - run: rm ${{ inputs.directory }}/artifact.zip
       shell: 'bash'
