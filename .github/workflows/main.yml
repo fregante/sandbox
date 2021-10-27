@@ -33,5 +33,6 @@ jobs:
       - uses: ./.github/actions/upload-zipped-artifact
         with:
           path: .github/ISSUE_TEMPLATE
+          directory: .github
           name: lol
           exclusions: '*.md'
