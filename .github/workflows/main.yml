@@ -30,6 +30,6 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - use: ./.github/actions/upload-zipped-artifact.yml
+      - uses: ./.github/actions/upload-zipped-artifact.yml
         with:
           path: .github
