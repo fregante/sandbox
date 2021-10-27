@@ -31,17 +31,17 @@ runs:
   steps:
     - uses: thedoctor0/zip-release@4fb9e4ff72847dd3d1c111cf63834e353ed7cb3d # Review updates manually
       with:
-        filename: artifact.zip
+        filename: ${{ inputs.name }}.zip
         path: ${{ inputs.path }}
         directory: ${{ inputs.directory }}
         exclusions: ${{ inputs.exclusions }}
 
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{ inputs.name }}
-        path: ${{ inputs.directory }}/artifact.zip
+        name: ${{ inputs.name }}-artifact
+        path: ${{ inputs.directory }}/${{ inputs.name }}.zip
         if-no-files-found: ${{ inputs.if-no-files-found }}
         retention-days: ${{ inputs.retention-days }}
 
-    - run: rm ${{ inputs.directory }}/artifact.zip
+    - run: rm ${{ inputs.directory }}/${{ inputs.name }}.zip
       shell: 'bash'
