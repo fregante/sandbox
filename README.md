@@ -20,6 +20,13 @@ paragraph [REMOVED]
 * list item
 * list item [REMOVED]
 
+
+<div align="center">
+	<p>
+	<p><sup>Fregante’s open source work is <a href="https://github.com/sponsors/fregante">supported by the community.</a><br>Special thanks to:
+	<p><a href="https://flowdash.com"><img src="https://raw.githubusercontent.com/FlowdashHQ/flowdash-assets/20653cfb0f707924f0da204810b6024a834a3b14/logos/logo-bg-white.svg" width="220" alt="FlowdashHQ"></a>
+</div>
+    
 1. list item
 2. list item
 3. list item [REMOVED]
