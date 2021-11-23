@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: "16"
       - run: npm install primereact
+      - run: npm install @types/react
       - run: npm install typescript
       - run: echo 'import { TreeTable } from "primereact/treetable";' > index.ts
       - run: echo "{compilerOptions:{skipLibCheck:false}}" > tsconfig.json
