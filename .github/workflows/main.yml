@@ -25,7 +25,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: npm
       - run: npm install primereact
       - run: npm install typescript
       - run: echo 'import { TreeTable } from "primereact/treetable";' > index.ts
