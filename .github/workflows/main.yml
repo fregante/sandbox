@@ -12,5 +12,5 @@ jobs:
       - run: npm install typescript
       - run: echo 'import { TreeTable } from "primereact/treetable";' > index.ts
       - run: |
-          echo '{"files": ["index.ts"], "compilerOptions": {"skipLibCheck": false, "lib": ["ES2019","ES2020.String","DOM"]}}' > tsconfig.json
+          echo '{files: ["index.ts"], compilerOptions: {lib: ["ES2019"]}}' > tsconfig.json
       - run: npx tsc
