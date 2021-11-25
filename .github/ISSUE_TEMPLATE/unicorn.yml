@@ -3,4 +3,5 @@ title: "Do not open new issues on this repo"
 body:
   - type: markdown
     attributes:
-      value: # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
+      value: |
+        # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
