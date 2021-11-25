@@ -1,5 +1,6 @@
 name: Use the xojs/xo repo for new issues
 title: "Do not open new issues on this repo"
+description:  Use the xojs/xo repo for new issues
 body:
   - type: markdown
     attributes:
