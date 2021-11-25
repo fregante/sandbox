@@ -9,4 +9,5 @@ body:
   - type: input
     id: ignored
     attributes:
-      label: ignored
+      label: |
+        # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
