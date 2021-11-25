@@ -8,4 +8,4 @@ body:
   - type: input
     id: ignored
     attributes:
-      label: .
+      label: ignored
