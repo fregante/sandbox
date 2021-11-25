@@ -1,5 +1,4 @@
-name: Use the xojs/xo repo for new issues
-title: "Do not open new issues on this repo"
+name: Do not open new issues on this repo
 description:  Use the xojs/xo repo for new issues
 body:
   - type: markdown
@@ -9,5 +8,4 @@ body:
   - type: input
     id: ignored
     attributes:
-      label: |
-        # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
+      label: ❌
