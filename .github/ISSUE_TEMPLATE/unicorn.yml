@@ -7,4 +7,4 @@ body:
         # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
   - type: input
     attributes:
-      title: .
+      label: .
