@@ -5,4 +5,4 @@ body:
     attributes:
       value: |
         # Use the [XO issue tracker](https://github.com/xojs/xo/issues) instead of this one.
-  - type: text
+  - type: input
