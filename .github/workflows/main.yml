@@ -3,14 +3,9 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SOURCE_MAP_PATH: sourcemaps/${{ github.job }}/${{ github.sha }}
+      SOURCE_MAP_URL_BASE: https://pixiebrix-extension-source-maps.s3.amazonaws.com/${{ env.SOURCE_MAP_PATH }}
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-      - run: npm install primereact
-      - run: npm install @types/react
-      - run: npm install typescript
-      - run: echo 'import { TreeTable } from "primereact/treetable";' > index.ts
-      - run: |
-          echo '{"files": ["index.ts"], "compilerOptions": {"lib": ["ES2019"]}}' > tsconfig.json
-      - run: npx tsc
+      - run: echo $SOURCE_MAP_PATH
+      - run: echo $SOURCE_MAP_URL_BASE
