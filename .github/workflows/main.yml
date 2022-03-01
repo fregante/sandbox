@@ -10,5 +10,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo $SOURCE_MAP_PATH
       - run: |
-          find . -name '*.js' | sed s/.\\// |parallel echo curl https://api.rollbar.com/api/1/sourcemap/download \
+          find . -name '*.js' | sed s/.\\/// | parallel echo curl https://api.rollbar.com/api/1/sourcemap/download \
             -F minified_url="$SOURCE_MAP_URL_BASE/$SOURCE_MAP_PATH/"{}
