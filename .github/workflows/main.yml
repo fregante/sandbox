@@ -7,5 +7,10 @@ jobs:
       SOURCE_MAP_PATH: sourcemaps/${{ github.job }}/${{ github.sha }}
       SOURCE_MAP_URL_BASE: https://pixiebrix-extension-source-maps.s3.amazonaws.com/$SOURCE_MAP_PATH
     steps:
+      - uses: actions/checkout@v2
       - run: echo $SOURCE_MAP_PATH
-      - run: echo $SOURCE_MAP_URL_BASE
+      - run: |
+          find dist -name '*.js' | parallel echo curl https://api.rollbar.com/api/1/sourcemap/download \
+           	-F version="$SOURCE_VERSION" \
+          	-F access_token="$ROLLBAR_BROWSER_ACCESS_TOKEN" \
+            -F minified_url="$SOURCE_MAP_URL_BASE/$SOURCE_MAP_PATH/"{}
