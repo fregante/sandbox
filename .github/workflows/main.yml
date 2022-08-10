@@ -4,4 +4,13 @@ jobs:
   optional-peer-deps:
     runs-on: ubuntu-latest
     steps:
-      - run: yarn add https://github.com/flying-sheep/xo.git#webpack-peer-dep
+      - run: corepack enable
+      - run: yarn init -2
+      - run: "yarn add 'xo@https://github.com/flying-sheep/xo.git#webpack-peer-dep'"
+
+  regular-peer-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - run: corepack enable
+      - run: yarn init -2
+      - run: yarn add xo
