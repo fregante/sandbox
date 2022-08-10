@@ -1,14 +1,7 @@
 name: CI
 on: push
 jobs:
-  build:
+  optional-peer-deps:
     runs-on: ubuntu-latest
-    env:
-      SOURCE_MAP_PATH: sourcemaps/${{ github.job }}/${{ github.sha }}
-      SOURCE_MAP_URL_BASE: https://pixiebrix-extension-source-maps.s3.amazonaws.com/$SOURCE_MAP_PATH
     steps:
-      - uses: actions/checkout@v2
-      - run: echo $SOURCE_MAP_PATH
-      - run: |
-          find . -name '*.js' | sed s/.\\/// | parallel echo curl https://api.rollbar.com/api/1/sourcemap/download \
-            -F minified_url="$SOURCE_MAP_URL_BASE/$SOURCE_MAP_PATH/"{}
+      - run: yarn add https://github.com/flying-sheep/xo.git#webpack-peer-dep
