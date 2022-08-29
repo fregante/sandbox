@@ -1,9 +1,6 @@
 name: dependabot
 
-on:
-  pull_request_target:
-    branches:
-      - "dependabot/submodules/*"
+on: [pull_request_target]
 
 permissions:
   pull-requests: write
