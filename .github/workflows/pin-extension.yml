@@ -2,12 +2,6 @@ name: dependabot
 
 on:
    pull_request_target:
-      types:
-      - opened
-      - reopened
-      - synchronize
-      branches:
-      - "dependabot/submodules/**"
 
 permissions:
   pull-requests: write
