@@ -16,11 +16,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-          cache: npm
-      - run: npm install
+      - run: echo lol > newfile
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update lockfile
