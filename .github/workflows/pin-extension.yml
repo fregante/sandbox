@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   lockfile-update:
+    if: ${{ github.actor == 'fregante' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
