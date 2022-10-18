@@ -7,7 +7,7 @@ on:
 
 jobs:
   reminder:
-    if: github.event.review.state == 'approved'
+  #  if: github.event.review.state == 'approved'
 
     runs-on: ubuntu-latest
 
