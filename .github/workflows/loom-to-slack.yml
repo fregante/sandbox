@@ -30,9 +30,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
+        echo 1
         PR=${{ github.event.pull_request.number }}
+        echo 2
         LOOM_REGEX='https://www.loom.com/share/\w\{32\}'
+        
+        echo 3
+        FOUND=$(gh pr view $PR)
+        echo 4
+        echo $FOUND
+        
         FOUND=$(gh pr view $PR | grep $LOOM_REGEX --max-count 1 --only-matching)
+        echo 5
         echo $FOUND
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
