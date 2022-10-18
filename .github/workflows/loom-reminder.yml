@@ -39,7 +39,7 @@ jobs:
             ${{ env.LOOM_LINK }}
       - name: Remind to post loom if missing
         uses: marocchino/sticky-pull-request-comment@v2
-        if: ! env.LOOM_LINK
+        if: ${{ ! env.LOOM_LINK }}
         with:
           message: |
             No loom links were found in the first post. Please add one if you'd like to it to appear on Slack.
