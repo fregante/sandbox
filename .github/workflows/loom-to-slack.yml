@@ -33,8 +33,12 @@ jobs:
         PR=${{ github.event.pull_request.number }}
         LOOM_REGEX='https://www.loom.com/share/\w\{32\}'
         FIRST_POST=$(gh pr view $PR)
+        echo FIRST POST
+        echo ----------
         echo $FIRST_POST
-        FOUND=$(echo $FIRST_POST | grep $LOOM_REGEX --max-count 1 --only-matching | true)
-        echo $FOUND
+        LOOM_LINK=$(echo $FIRST_POST | grep $LOOM_REGEX --max-count 1 --only-matching | true)
+        echo LOOM LINK
+        echo ----------
+        echo $LOOM_LINK
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
