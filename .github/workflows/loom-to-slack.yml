@@ -40,7 +40,7 @@ jobs:
         echo 4
         echo $FOUND
         
-        FOUND=$(gh pr view $PR | grep $LOOM_REGEX --max-count 1 --only-matching)
+        FOUND=$(gh pr view $PR | grep $LOOM_REGEX --max-count 1 --only-matching || false)
         echo 5
         echo $FOUND
       env:
