@@ -33,3 +33,5 @@ jobs:
         LOOM_REGEX=https://www.loom.com/share/\\w{32}
         FOUND=$(gh pr view $PR | rg $LOOM_REGEX --max-count 1 --only-matching)
         echo $FOUND
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
