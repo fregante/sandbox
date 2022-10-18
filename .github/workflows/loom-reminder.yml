@@ -25,7 +25,7 @@ jobs:
           echo
           echo LOOM LINK
           echo ----------
-          LOOM_LINK=$(echo $FIRST_POST | grep $LOOM_REGEX --max-count 1 --only-matching | true)
+          LOOM_LINK=$(echo "$FIRST_POST" | grep $LOOM_REGEX --max-count 1 --only-matching | true)
           echo $LOOM_LINK
           echo "LOOM_LINK=$LOOM_LINK" >> $GITHUB_OUTPUT
           
