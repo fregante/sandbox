@@ -16,31 +16,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          printenv
           PR=${{ github.event.pull_request.number }}
-          LOOM_REGEX="https://www.loom.com/share/\w\{32\}"
-          echo FIRST POST
-          echo ----------
-          FIRST_POST=$(gh pr view $PR --repo $GITHUB_REPOSITORY)
-          echo $FIRST_POST
-          echo
-          echo LOOM LINK
-          echo ----------
-          LOOM_LINK=$(echo "$FIRST_POST" | grep $LOOM_REGEX --max-count 1 --only-matching || true)
-          echo $LOOM_LINK
-          echo "LOOM_LINK=$LOOM_LINK" >> $GITHUB_ENV
-          
+          printenv
+      - run: printenv
       - name: Post loom if present
         uses: marocchino/sticky-pull-request-comment@v2
-        if: env.LOOM_REGEX
+        if: env.PR
         with:
           message: |
             After the PR is merged, this loom will be posted to #sprint-demo on Slack:
             
-            ${{ env.LOOM_REGEX }}
-      - name: Remind to post loom if missing
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: ${{ ! env.LOOM_LINK }}
-        with:
-          message: |
-            No loom links were found in the first post. Please add one if you'd like to it to appear on Slack.
+            ${{ env.PR }}
