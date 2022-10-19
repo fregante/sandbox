@@ -1,44 +1,12 @@
-name: Loom to slack
+name: Loom Reminder
 
 on:
-  pull_request:
+  pull_request_review:
     types:
-      - assigned
-      - unassigned
-      - labeled
-      - unlabeled
-      - opened
-      - edited
-      - closed
-      - reopened
-      - synchronize
-      - converted_to_draft
-      - ready_for_review
-      - locked
-      - unlocked 
-      - review_requested 
-      - review_request_removed 
-      - auto_merge_enabled 
-      - auto_merge_disabled
+      - submitted
+
 
 jobs:
-  post:
-   #  if: github.event.pull_request.merged == 'true'
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - run: |
-        PR=${{ github.event.pull_request.number }}
-        LOOM_REGEX='https://www.loom.com/share/\w\{32\}'
-        FIRST_POST=$(gh pr view $PR)
-        echo FIRST POST
-        echo ----------
-        echo $FIRST_POST
-        LOOM_LINK=$(echo $FIRST_POST | grep $LOOM_REGEX --max-count 1 --only-matching | true)
-        echo LOOM LINK
-        echo ----------
-        echo $LOOM_LINK
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  call-workflow-passing-data:
+    uses: fregante/sandbox/.github/r.yml@reminder
+    secrets: inherit
