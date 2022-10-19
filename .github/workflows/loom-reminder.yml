@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Find first loom
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
