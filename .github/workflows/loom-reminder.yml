@@ -18,7 +18,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr view $1 |
+          gh pr view ${{ github.event.pull_request.number }} |
           grep "https://www.loom.com/share/\w\{32\}" --max-count 1 --only-matching |
           tee LOOM_LINK || true
 
