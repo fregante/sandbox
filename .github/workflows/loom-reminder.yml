@@ -16,6 +16,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          printenv
           PR=${{ github.event.pull_request.number }}
           LOOM_REGEX="https://www.loom.com/share/\w\{32\}"
           echo FIRST POST
