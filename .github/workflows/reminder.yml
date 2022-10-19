@@ -5,8 +5,7 @@ on:
     types:
       - submitted
 
-
 jobs:
   call-workflow-passing-data:
-    uses: fregante/sandbox/.github/workflows/r.yml@reminder
+    uses: pixiebrix/pixiebrix-extension/.github/workflows/loom-reminder.yml@F/dx/loom-to-slack
     secrets: inherit
