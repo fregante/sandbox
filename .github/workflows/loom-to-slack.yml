@@ -8,5 +8,5 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: fregante/sandbox/.github/r.yml@reminder
+    uses: fregante/sandbox/.github/workflows/r.yml@reminder
     secrets: inherit
