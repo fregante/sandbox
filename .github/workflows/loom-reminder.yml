@@ -16,7 +16,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          PR=${{ github.event.pull_request.number }}
+          export PR=${{ github.event.pull_request.number }}
           printenv
       - run: printenv
       - name: Post loom if present
