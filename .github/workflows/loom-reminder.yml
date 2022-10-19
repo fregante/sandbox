@@ -32,12 +32,12 @@ jobs:
           
       - name: Post loom if present
         uses: marocchino/sticky-pull-request-comment@v2
-        if: env.LOOM_LINK
+        if: env.LOOM_REGEX
         with:
           message: |
             After the PR is merged, this loom will be posted to #sprint-demo on Slack:
             
-            ${{ env.LOOM_LINK }}
+            ${{ env.LOOM_REGEX }}
       - name: Remind to post loom if missing
         uses: marocchino/sticky-pull-request-comment@v2
         if: ${{ ! env.LOOM_LINK }}
