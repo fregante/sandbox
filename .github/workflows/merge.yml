@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     # https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs
     outputs:
-      link: ${{ steps.link.outputs.link }}
+      link: ${{ env.LOOM_LINK }}
     steps:
       - run: gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} | tee ./FIRST_POST
         env:
@@ -22,11 +22,10 @@ jobs:
 
       # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
       - name: Find loom
-        id: link
         run: |
           REGEX="https://\(www\.\)\?loom\.com/share/\w\{32\}"
           grep $REGEX ./FIRST_POST --max-count 1 --only-matching | tee ./LOOM_LINK # || true
-          echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
+          echo "LOOM_LINK=$(cat LOOM_LINK)" >> $GITHUB_ENV
 
   reminder:
     needs: search
