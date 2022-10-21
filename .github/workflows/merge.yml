@@ -13,7 +13,7 @@ jobs:
   search:
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr view ${{ github.event.pull_request.number }} --repo $GITHUB_REPOSITORY > FIRST_POST
+      - run: gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} | tee ./FIRST_POST
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -23,7 +23,7 @@ jobs:
         run: |
           grep "https://www.loom.com/share/\w\{32\}" FIRST_POST --max-count 1 --only-matching > ./LOOM_LINK || true
           echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
-          echo "Link if found: $(cat LOOM_LINK)" >> $GITHUB_SUMMARY
+          echo "Link if found: $(cat LOOM_LINK)" >> $GITHUB_STEP_SUMMARY
 
   reminder:
     needs: search
