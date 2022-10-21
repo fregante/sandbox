@@ -12,6 +12,9 @@ on:
 jobs:
   search:
     runs-on: ubuntu-latest
+    # https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs
+    outputs:
+      link: ${{ steps.link.outputs.link }}
     steps:
       - run: gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} | tee ./FIRST_POST
         env:
@@ -21,8 +24,10 @@ jobs:
       - name: Find loom
         id: link
         run: |
-          REGEX="https://www.loom.com/share/\w\{32\}"
-          grep $REGEX ./FIRST_POST --max-count 1 --only-matching | tee ./LOOM_LINK || true
+          REGEX="https://www.loom.com/share"
+          cat ./FIRST_POST
+          grep $REGEX ./FIRST_POST | tee ./LOOM_LINK # || true
+          # grep $REGEX ./FIRST_POST --max-count 1 --only-matching | tee ./LOOM_LINK # || true
           echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
 
   reminder:
