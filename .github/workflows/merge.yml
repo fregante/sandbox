@@ -1,0 +1,10 @@
+name: Loom to slack
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  post:
+    uses: pixiebrix/pixiebrix-extension/.github/workflows/loom-slack.yml@main
