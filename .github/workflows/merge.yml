@@ -25,10 +25,10 @@ jobs:
         id: link
         run: |
           REGEX="https://www.loom.com/share"
-          cat ./FIRST_POST
           grep $REGEX ./FIRST_POST | tee ./LOOM_LINK # || true
           # grep $REGEX ./FIRST_POST --max-count 1 --only-matching | tee ./LOOM_LINK # || true
-          echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
+          cat ./LOOM_LINK
+          echo "link=$(cat ./LOOM_LINK)" >> $GITHUB_OUTPUT
 
   reminder:
     needs: search
