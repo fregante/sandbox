@@ -17,18 +17,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
       - name: Find loom
         id: link
         run: |
-          grep "https://www.loom.com/share/\w\{32\}" FIRST_POST --max-count 1 --only-matching |
-          tee ./LOOM_LINK || true # Don't throw if not found
-
-          # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+          grep "https://www.loom.com/share/\w\{32\}" FIRST_POST --max-count 1 --only-matching > ./LOOM_LINK || true
           echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
+          echo "Link if found: $(cat LOOM_LINK)" >> $GITHUB_SUMMARY
 
   reminder:
     needs: search
-    if: github.event.review.state == 'comment'
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - name: Post loom if present
