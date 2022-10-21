@@ -1,10 +1,65 @@
 name: Loom to slack
 
 on:
+  workflow_call: # Enable workflow reuse/import
+  pull_request_review:
+    types:
+      - submitted
   pull_request:
     types:
       - closed
 
 jobs:
-  post:
-    uses: pixiebrix/pixiebrix-extension/.github/workflows/loom-slack.yml@main
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr view ${{ github.event.pull_request.number }} > FIRST_POST
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Find loom
+        id: link
+        run: |
+          grep "https://www.loom.com/share/\w\{32\}" FIRST_POST --max-count 1 --only-matching |
+          tee ./LOOM_LINK || true # Don't throw if not found
+
+          # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+          echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
+
+  reminder:
+    needs: search
+    if: github.event.review.state == 'comment'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post loom if present
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ needs.search.outputs.link }}
+        with:
+          message: |
+            > After the PR is merged, this loom will be posted to `#sprint-demo` on Slack:
+            >
+            > ${{ needs.search.outputs.link }}
+
+      - name: Remind to post loom if missing
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ ! needs.search.outputs.link }}
+        with:
+          message: |
+            > No loom links were found in the first post. Please add one if you'd like to it to appear on Slack.
+
+  slack:
+    needs: search
+    if: github.event.pull_request.merged && needs.search.outputs.link
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: sprint-demo
+          SLACK_MESSAGE: |
+            # ${{ github.event.pull_request.title }}
+
+            <${{ github.event.pull_request.html_url }}|Pull request #${{ github.event.pull_request.number }}>
+            <${{ needs.search.outputs.link }}|Demo video>
+          SLACK_FOOTER: 🚀
+          MSG_MINIMAL: true
