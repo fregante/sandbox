@@ -24,7 +24,7 @@ jobs:
       - name: Find loom
         id: link
         run: |
-          REGEX="https://(www\.)?loom\.com/share/\w\{32\}"
+          REGEX="https://\(www\.\)\?loom\.com/share/\w\{32\}"
           grep $REGEX ./FIRST_POST --max-count 1 --only-matching | tee ./LOOM_LINK # || true
           echo "link=$(cat LOOM_LINK)" >> $GITHUB_OUTPUT
 
