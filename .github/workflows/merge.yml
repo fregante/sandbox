@@ -13,7 +13,7 @@ jobs:
   search:
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr view ${{ github.event.pull_request.number }} > FIRST_POST
+      - run: gh pr view ${{ github.event.pull_request.number }} --repo $GITHUB_REPOSITORY > FIRST_POST
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
