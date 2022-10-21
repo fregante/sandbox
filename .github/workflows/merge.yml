@@ -30,7 +30,7 @@ jobs:
 
   reminder:
     needs: search
-    if: github.event.review.state == 'comment'
+    if: github.event.review
     runs-on: ubuntu-latest
     steps:
       - name: Post loom if present
