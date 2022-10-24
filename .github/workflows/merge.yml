@@ -7,6 +7,6 @@ jobs:
   search:
     runs-on: ubuntu-latest
     steps:
-      - run: WEWE=a
+      - run: echo WEWE=a >> $GITHUB_ENV
       - run: echo $WEWE
       - run: echo ${{ env.WEWE}}
