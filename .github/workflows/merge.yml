@@ -17,6 +17,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: echo $STATUS
       - run: echo ${{ env.STATUS}}
-        if: env.STATUS == 'OPEN'
+        if: ${{ true && env.STATUS == 'OPEN'}}
       - run: echo ${{ env.STATUS}}
         if: env.STATUS == 'CLOSED'
