@@ -1,16 +1,12 @@
 name: Loom to slack
 
 on:
-  workflow_call: # Enable workflow reuse/import
-  pull_request_review:
-    types:
-      - submitted
-  pull_request:
-    types:
-      - closed
+  push:
 
 jobs:
   search:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJSON(github)}}
+      - run: WEWE=a
+      - run: echo $WEWE
+      - run: echo ${{ env.WEWE}}
