@@ -3,7 +3,8 @@ name: Loom to slack
 on:
   push:
 
-if: github.actor == 'dependabot[bot]'
+if: ${{ github.actor != 'dependabot[bot]' }}
+
 
 jobs:
   search:
