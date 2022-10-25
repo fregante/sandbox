@@ -3,6 +3,8 @@ name: Loom to slack
 on:
   push:
 
+if: github.actor != 'dependabot[bot]'
+
 jobs:
   search:
     runs-on: ubuntu-latest
