@@ -1,0 +1,31 @@
+# Flow defined in https://github.com/pixiebrix/pixiebrix-app/pull/2178
+
+name: commit-ci-test
+
+on:
+  pull_request_target:
+    # Do not use, it doesn't work. It seems that the workflow is run from the `main` branch instead
+    # branches: ["dependabot/submodules/**"]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  lockfile-update:
+    if: github.actor == 'fregante'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          token: ${{ secrets.PAT }}
+      - run: sleep 50
+      - run: echo > new-file-$(date +%s)
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: commit
+
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Before merging, verify whether further changes are required/suggested. Some extension PRs may have have a ["requires app updates" label](https://github.com/pixiebrix/pixiebrix-extension/issue?q=is%3Aopen+label%3A%22requires+app+updates%22) which can then be removed after this PR is merged.
