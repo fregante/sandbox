@@ -7,9 +7,6 @@ on:
     # Do not use, it doesn't work. It seems that the workflow is run from the `main` branch instead
     # branches: ["dependabot/submodules/**"]
 
-permissions:
-  pull-requests: write
-
 jobs:
   lockfile-update:
     if: github.actor == 'fregante'
