@@ -15,6 +15,7 @@ jobs:
   Version:
     runs-on: ubuntu-latest
     steps:
+      - run: gh release create
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
