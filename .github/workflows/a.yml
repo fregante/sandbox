@@ -5,7 +5,7 @@ env:
   PROJECT_NAME: extension
 
 on:
-  push
+  push:
   workflow_dispatch:
   # You can manually trigger a deployment on GitHub.com
   # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
