@@ -1,0 +1,30 @@
+name: Release
+
+env:
+  DIRECTORY: distribution
+  PROJECT_NAME: extension
+
+on:
+  workflow_dispatch:
+  # You can manually trigger a deployment on GitHub.com
+  # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  Version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
