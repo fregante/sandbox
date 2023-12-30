@@ -55,6 +55,7 @@ jobs:
         exclude:
           - INSTALL_TYPE: production
             MV: 3
+            PUBLIC_NAME: "-mv3"
 
     name: build-${{ matrix.INSTALL_TYPE }}${{ matrix.PUBLIC_NAME }}
     env:
