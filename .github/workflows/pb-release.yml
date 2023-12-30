@@ -1,9 +1,6 @@
 name: Release Build
 
-on:
-  push:
-    branches:
-      - "release/**"
+on: push
 
 env:
   # Creates and uploads sourcemaps to Rollbar, and save the built extension as an artifact
