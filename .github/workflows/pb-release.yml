@@ -41,6 +41,7 @@ jobs:
 
     # Docs https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations
     strategy:
+      fail-fast: false
       matrix:
         INSTALL_TYPE:
           - for-store
