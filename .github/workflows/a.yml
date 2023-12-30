@@ -13,7 +13,17 @@ on:
     - cron: '59 * * * *'
 
 jobs:
+  ternary:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '${{ toJSON(env.AND) }}'
+        env:
+          AND: ${{ toJSON(secrets.MISSING == 1 && "hello") }}
+      - run: echo '${{ toJSON(env.OR) }}'
+        env:
+          OR: ${{ toJSON(secrets.MISSING == 1 || "hello") }}
   Version:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
