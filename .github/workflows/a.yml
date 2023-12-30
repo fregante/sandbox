@@ -18,11 +18,10 @@ jobs:
     steps:
       - run: echo '${{ toJSON(env.AND) }}'
         env:
-          AND: ${{ github.event_name != "workflow_dispatch" && 'true' || inputs.production }}
-      #     AND: ${{ secrets.MISSING == '1' && "hello" || 'final' }}
-      # - run: echo '${{ toJSON(env.OR) }}'
-      #   env:
-      #     OR: ${{ secrets.MISSING == '1' || "hello" && 'final' }}
+          AND: ${{ secrets.MISSING == '1' && 'hello' || 'final' }}
+      - run: echo '${{ toJSON(env.OR) }}'
+        env:
+          OR: ${{ secrets.MISSING == '1' || 'hello' && 'final' }}
   Version:
     if: false
     runs-on: ubuntu-latest
