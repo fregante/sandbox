@@ -18,10 +18,10 @@ jobs:
     steps:
       - run: echo '${{ toJSON(env.AND) }}'
         env:
-          AND: ${{ secrets.MISSING == 1 && "hello" }}
+          AND: ${{ secrets.MISSING == 1 && "hello" || 'final' }}
       - run: echo '${{ toJSON(env.OR) }}'
         env:
-          OR: ${{ secrets.MISSING == 1 || "hello" }}
+          OR: ${{ secrets.MISSING == 1 || "hello" && 'final' }}
   Version:
     if: false
     runs-on: ubuntu-latest
