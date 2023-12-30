@@ -52,7 +52,7 @@ jobs:
             # TODO: Set MV3-specific key
             CHROME_MANIFEST_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhYpgz6Nt3vv5n3d8jyrsWXjkvAxh7bz8WJW05RFrtJx9t0BiVVclO+WpAmhKanB2BiTDw4+Dnlf2lQfTo62LIBnkfTiGzukKqTu3plF0D/Tl/yG1st1xKaQ6dekeThcsgxrFD8+kIUwF4Vq0wPpQ5upl+vf6kX4t9eDev8Eg86mHzUEG/QoS/bu5evN3I1Z0HsiF84VWlrV0b/1GSqpn+dMrFFdcwo2Sn0Ec65nSNfzauDUm5n0NToQ8iYdHkuottREXKJ7/Uy4tO0eMmfokVixbm0i2m9aHEOior5CmNG9X/yGtR2CiM1N4DSEY5mTFu5hPOrALspJ+t7+Is7YnFwIDAQAB
 
-    name: build-${{ matrix.INSTALL_TYPE }}${{ matrix.PUBLIC_NAME }}
+    name: build-mv${{ matrix.MV }}
     env:
       SOURCE_MAP_URL_BASE: https://pixiebrix-extension-source-maps.s3.amazonaws.com
       SOURCE_MAP_PATH: sourcemaps/${{ github.job }}/${{ github.sha }}/mv${{ matrix.MV }}
@@ -60,9 +60,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: npm
       - run: npm ci
       - run: npm run build
         env:
