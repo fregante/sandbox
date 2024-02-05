@@ -10,7 +10,7 @@ jobs:
         uses: tj-actions/changed-files@v42
         with:
           json: "true"
-          files: "**.{ts,tsx}"
+          files: "src/**.{ts,tsx}"
       - name: List all changed files
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
       - name: Verify that new files in this PR appear in tsconfig.strictNullChecks.json
@@ -21,7 +21,7 @@ jobs:
             const newFiles = JSON.parse('${{ steps.changedfiles.outputs.added_files }}');
             console.log(tsconfigJson)
             console.log('New files:', newFiles)
-            const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.files.includes(file));
+            const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.files.includes(file.replace('src', '.')));
             if (newFilesNotInTsconfig.length > 0) {
               throw new Error(`The following new files are not included in tsconfig.strictNullChecks.json: ${newFilesNotInTsconfig.join(', ')}`);
             }
