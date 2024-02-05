@@ -6,19 +6,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get list of changed files
-        id: changesAction
+        id: changed-files
         uses: tj-actions/changed-files@v42
         with:
           json: "true"
-          files: |
-            **.ts
-            **.tsx
+          files: "**.{ts,tsx}"
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
       - name: Verify that new files in this PR appear in tsconfig.strictNullChecks.json
         uses: actions/github-script@v7
         with:
           script: |
             const tsconfigJson = require('./tsconfig.strictNullChecks.json');
-            const newFiles = "${{ steps.changesAction.outputs.added }}";
+            const newFiles = "${{ steps.changed-files.outputs.added }}";
             console.log('New files:', newFiles)
             const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.include.includes(file));
             if (newFilesNotInTsconfig.length > 0) {
