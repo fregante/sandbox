@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get list of changed files
-        id: changed-files
+        id: changedfiles
         uses: tj-actions/changed-files@v42
         with:
           json: "true"
@@ -18,7 +18,7 @@ jobs:
         with:
           script: |
             const tsconfigJson = require('./tsconfig.strictNullChecks.json');
-            const newFiles = context.steps.changed-files.outputs.added;
+            const newFiles = context.steps.changedfiles.outputs.added;
             console.log('New files:', newFiles)
             const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.include.includes(file));
             if (newFilesNotInTsconfig.length > 0) {
