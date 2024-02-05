@@ -19,8 +19,7 @@ jobs:
           script: |
             const tsconfigJson = require('./tsconfig.strictNullChecks.json');
             const newFiles = JSON.parse('${{ steps.changedfiles.outputs.added_files }}');
-            console.log(tsconfigJson)
-            console.log('New files:', newFiles)
+            console.log('New files:', newFiles, file.replace('src', '.'))
             const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.files.includes(file.replace('src', '.')));
             if (newFilesNotInTsconfig.length > 0) {
               throw new Error(`The following new files are not included in tsconfig.strictNullChecks.json: ${newFilesNotInTsconfig.join(', ')}`);
