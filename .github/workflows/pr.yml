@@ -21,7 +21,7 @@ jobs:
             const newFiles = JSON.parse('${{ steps.changedfiles.outputs.added_files }}');
             console.log(tsconfigJson)
             console.log('New files:', newFiles)
-            const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.include.includes(file));
+            const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.files.includes(file));
             if (newFilesNotInTsconfig.length > 0) {
               throw new Error(`The following new files are not included in tsconfig.strictNullChecks.json: ${newFilesNotInTsconfig.join(', ')}`);
             }
