@@ -12,7 +12,7 @@ jobs:
         uses: tj-actions/changed-files@v42
         with:
           json: "true"
-          files: "src/**.{ts,tsx}"
+          files: "src/**/*.{ts,tsx}"
       - name: List all changed files
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
       - name: Verify that new files in this PR appear in tsconfig.strictNullChecks.json
