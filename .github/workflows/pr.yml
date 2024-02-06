@@ -31,12 +31,8 @@ jobs:
             for (const looseFile of looseFiles) {
               core.error('This file should be included in the strictNullChecks config', {
                 title: 'strictNullChecks',
-                file: looseFile
+                file: looseFile.replace('.', 'src')
               });
-            }
-            if (looseFiles.length > 0) {
-              console.error(`❌ These new files should be included in tsconfig.strictNullChecks.json:\n${newFilesNotInTsconfig.join('\n')}`);
-              process.exitCode = 1
-            } else {
-              console.log('✅ The new files are strict');
+              console.error(`❌ ${looseFile} was not found in strictNullChecks`);
+              process.exitCode = 1;
             }
