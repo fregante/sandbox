@@ -22,20 +22,19 @@ jobs:
             const tsconfigJson = require('./tsconfig.strictNullChecks.json');
             const newFiles = JSON.parse('${{ steps.changedfiles.outputs.added_files }}')
             if (newFiles.length === 0) {
-              console.log('✅ No new files found');
+              console.log('No new files found');
               return;
             }
 
             for (const newFile of newFiles) {
               if (tsconfigJson.files.includes(newFile.replace('src', '.'))) {
-                console.log(`✅ ${newFile} was found in strictNullChecks`);
+                console.log(`${newFile} is in tsconfig.strictNullChecks.json`);
                 continue;
               }
 
-              core.error('This file should be included in the strictNullChecks config', {
+              core.error(`${newFile} was not found in tsconfig.strictNullChecks.json`, {
                 title: 'strictNullChecks',
                 file: newFile,
               });
-              console.error(`❌ ${newFile} was not found in strictNullChecks`);
               process.exitCode = 1;
             }
