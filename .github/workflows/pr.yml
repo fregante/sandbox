@@ -1,7 +1,7 @@
 name: PR
 on: pull_request
 jobs:
-  build:
+  strictNullChecks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,8 +27,14 @@ jobs:
               return;
             }
             console.log('🔄 Found new files:\n', newFiles.join('\n'))
-            const newFilesNotInTsconfig = newFiles.filter(file => !tsconfigJson.files.includes(file));
-            if (newFilesNotInTsconfig.length > 0) {
+            const looseFiles = newFiles.filter(file => !tsconfigJson.files.includes(file));
+            for (const looseFile of looseFiles) {
+              core.error('This file should be included in the strictNullChecks config', {
+                title: 'strictNullChecks',
+                file: looseFile
+              });
+            }
+            if (looseFiles.length > 0) {
               console.error(`❌ These new files should be included in tsconfig.strictNullChecks.json:\n${newFilesNotInTsconfig.join('\n')}`);
               process.exitCode = 1
             } else {
