@@ -4,6 +4,7 @@
     "strictNullChecks": true
   },
   "files": [
+    "./lol/something/new.tsx",
     "./__mocks__/@/components/DelayedRender.tsx",
     "./__mocks__/@/contentScript/focusCaptureDialog.ts",
     "./__mocks__/@/hooks/useContextInvalidated.ts",
