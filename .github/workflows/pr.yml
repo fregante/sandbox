@@ -5,17 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: stats
+      - id: stats
         run: |
-        STAT="$(git diff --numstat HEAD^ HEAD package-lock.json)"
+          STAT="$(git diff --numstat HEAD^ HEAD package-lock.json)"
 
-        DELETED="$(echo $STAT | cut -f1)"
-        ADDED="$(echo $STAT | cut -f2)"
-        TOTAL_CHANGES=$((DELETED + ADDED))
-        echo "STAT=$STAT"
-        echo "Total changes in package-lock.json: $TOTAL_CHANGES"
-        echo "changes=$TOTAL_CHANGES" >> $GITHUB_OUTPUT
+          DELETED="$(echo $STAT | cut -f1)"
+          ADDED="$(echo $STAT | cut -f2)"
+          TOTAL_CHANGES=$((DELETED + ADDED))
+          echo "STAT=$STAT"
+          echo "Total changes in package-lock.json: $TOTAL_CHANGES"
+          echo "changes=$TOTAL_CHANGES" >> $GITHUB_OUTPUT
       - name: leave annotation comment on pr
         if: steps.stats.outputs.changes > 10
         run: |
-        echo "::error file=package-lock.json::package-lock.json has more than 1000 lines changed. Please check if this is intended."
+          echo "::error file=package-lock.json::package-lock.json has more than 1000 lines changed. Please check if this is intended."
