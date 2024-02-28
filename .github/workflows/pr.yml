@@ -9,7 +9,8 @@ jobs:
           sparse-checkout: package-lock.json
       - id: stats
         run: |
-          git fetch ${{ github.base_ref }}
+          git remote
+          git fetch origin ${{ github.base_ref }}
           STAT="$(git diff --numstat ${{ github.base_ref }}..HEAD -- package-lock.json)"
 
           DELETED="$(echo $STAT | cut -f1)"
