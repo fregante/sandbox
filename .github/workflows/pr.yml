@@ -13,7 +13,7 @@ jobs:
         run: |
           git remote
           git fetch origin ${{ github.base_ref }}
-          STAT="$(git diff --numstat ${{ github.base_ref }}..HEAD -- package-lock.json)"
+          STAT="$(git diff --numstat origin/${{ github.base_ref }}..HEAD -- package-lock.json)"
 
           DELETED="$(echo $STAT | cut -f1)"
           ADDED="$(echo $STAT | cut -f2)"
