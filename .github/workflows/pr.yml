@@ -12,9 +12,9 @@ jobs:
           git remote
           git fetch origin ${{ github.base_ref }}
           STAT="$(git diff --numstat origin/${{ github.base_ref }}..HEAD -- package-lock.json)"
-
-          DELETED="$(echo $STAT | cut -f1)"
-          ADDED="$(echo $STAT | cut -f2)"
+          # STAT looks like: 9 0 package-lock.json
+          DELETED=$(echo $STAT | cut -d " " -f 1)
+          ADDED=$(echo $STAT | cut -d " " -f 2)
           TOTAL_CHANGES=$((DELETED + ADDED))
           echo "STAT=$STAT"
           echo "Total changes in package-lock.json: $TOTAL_CHANGES"
