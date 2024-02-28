@@ -20,7 +20,7 @@ jobs:
           echo "TOTAL_CHANGES=$TOTAL_CHANGES"
           echo "changes=$TOTAL_CHANGES" >> $GITHUB_OUTPUT
       - name: leave sticky comment on pr
-        if: steps.stats.outputs.changes > 1000
+        if: steps.stats.outputs.changes > 1
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
