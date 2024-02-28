@@ -5,6 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          sparse-checkout: package-lock.json
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: package-lock.json
       - id: stats
         run: |
           STAT="$(git diff --numstat ${{ github.base_ref }}..HEAD -- package-lock.json)"
