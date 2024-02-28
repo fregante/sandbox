@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: stats
         run: |
-          STAT="$(git diff --numstat ${{ github.base_ref }} HEAD package-lock.json)"
+          STAT="$(git diff --numstat origin/${{ github.base_ref }} HEAD package-lock.json)"
 
           DELETED="$(echo $STAT | cut -f1)"
           ADDED="$(echo $STAT | cut -f2)"
