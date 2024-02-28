@@ -3,6 +3,8 @@ on: pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
+    # only if it touches package-lock.json
+    if: contains(github.event.pull_request.files, 'package-lock.json')
     steps:
       - uses: actions/checkout@v4
         with:
