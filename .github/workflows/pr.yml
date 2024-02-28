@@ -12,14 +12,15 @@ jobs:
           git remote
           git fetch origin ${{ github.base_ref }}
           STAT="$(git diff --numstat origin/${{ github.base_ref }}..HEAD -- package-lock.json)"
-          # STAT looks like: 9 0 package-lock.json
           DELETED=$(echo $STAT | cut -d " " -f 1)
           ADDED=$(echo $STAT | cut -d " " -f 2)
           TOTAL_CHANGES=$((DELETED + ADDED))
           echo "STAT=$STAT"
-          echo "Total changes in package-lock.json: $TOTAL_CHANGES"
+          echo "DELETED=$DELETED"
+          echo "ADDED=$ADDED"
+          echo "TOTAL_CHANGES=$TOTAL_CHANGES"
           echo "changes=$TOTAL_CHANGES" >> $GITHUB_OUTPUT
       - name: leave annotation comment on pr
-        if: steps.stats.outputs.changes > 10
+        if: steps.stats.outputs.changes > 4
         run: |
           echo "::error file=package-lock.json::package-lock.json has more than 1000 lines changed. Please check if this is intended."
