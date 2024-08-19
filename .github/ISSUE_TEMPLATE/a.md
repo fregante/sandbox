@@ -1,6 +1,6 @@
 ---
 name: 💡 Suggest new type
-about: '​‌‍﻿⁠ '
+about: '​‌‍﻿⁠'
 title: 'Proposal: '
 labels: 'type addition'
 ---
