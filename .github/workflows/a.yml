@@ -16,7 +16,7 @@ on:
       release-channel:
         description: Release channel
         required: true
-        default: false
+        default: no default for me, fellas
         type: choice
         options:
           - beta
