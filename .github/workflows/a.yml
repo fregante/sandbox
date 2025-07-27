@@ -7,6 +7,20 @@ env:
 on:
   push:
   workflow_dispatch:
+    inputs:
+      run-tests:
+        description: Run tests
+        required: false
+        default: true
+        type: boolean
+      release-channel:
+        description: Release channel
+        required: true
+        default: false
+        type: choice
+        options:
+          - beta
+          - demo
   # You can manually trigger a deployment on GitHub.com
   # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
   schedule:
