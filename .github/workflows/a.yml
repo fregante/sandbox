@@ -19,12 +19,13 @@ on:
         default: no default for me, fellas
         type: choice
         options:
+          - "------"
           - beta
           - demo
   # You can manually trigger a deployment on GitHub.com
   # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
   schedule:
-    - cron: '59 * * * *'
+    - cron: '59 * * 1 *'
 
 jobs:
   ternary:
